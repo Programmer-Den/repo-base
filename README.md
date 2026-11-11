@@ -14,7 +14,7 @@ GitHub → **New repository** → *Repository template* `Programmer-Den/repo-bas
 6. Run the **Labels** workflow once by hand.
 7. Add the repository secret `PROJECTS_TOKEN` (a classic token with only the `project` scope), start **Project setup** by hand, then finish each new Project on GitHub: turn on its Auto-add workflow (filter `is:issue,pr is:open`, plus `label:<area>` for an area's Project), set its "Item added to project" workflow to Issue only with the status Todo, and link it to the repository if the run summary says so. Without the secret the Project workflows do nothing.
 8. Repositories outside Programmer-Den: add the secret `FORBIDDEN_NAMES` (real names, one per line) to the repository; inside the organization it comes from the organization secret.
-9. Add a ruleset "Protect main": pull request with review, required checks `CI / Checks / Secret and link check`, `PR Links / PR Links / github-links-only`, `PR Links / PR Links / no-real-names` and `PR Template Validation / PR Template / validate-pr-template`, no force push or deletion. On a private repository this needs GitHub Pro.
+9. Import the ruleset "Protect main" from `.github/rulesets/protect-main.json`: **Settings → Rules → Rulesets → New ruleset → Import a ruleset**. It requires a pull request with a code owner review and squash merge, the checks `Checks / Secret and link check`, `PR Links / github-links-only`, `PR Links / no-real-names` and `PR Template / validate-pr-template`, and blocks force push and deletion; repository admins can bypass it. On a private repository this needs GitHub Pro.
 
 ## What comes with it
 
@@ -24,6 +24,7 @@ GitHub → **New repository** → *Repository template* `Programmer-Den/repo-bas
 | `.github/ISSUE_TEMPLATE/` | Issue forms for bug report and feature wish, each with its Change label and an Area dropdown; blank issues are off |
 | `.github/projects.json` | The GitHub Projects (boards) of the repository, created by Project setup |
 | `.github/labels.json` | Labels of the groups Change, Area, Priority and Status, synced by the Labels workflow |
+| `.github/rulesets/protect-main.json` | The "Protect main" ruleset, to import in the repository settings |
 | `.github/CODEOWNERS` | Every pull request asks @Chriszly for a review |
 | `.github/dependabot.yml` | Weekly updates of the actions, with labels |
 | `.gitleaks.toml`, `.gitleaksignore` | Secret check rules and known harmless findings |
